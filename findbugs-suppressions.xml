@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<FindBugsFilter>
+  <Match>
+    <Class name="io.apigee.lembos.utils.RunnerUtils" />
+    <Method name="addLibJarsToClassLoader" />
+    <Bug pattern="DP_CREATE_CLASSLOADER_INSIDE_DO_PRIVILEGED" />
+  </Match>
+</FindBugsFilter>

@@ -1,0 +1,68 @@
+/*
+ * Copyright 2014 Apigee Corporation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package io.apigee.lembos.mapreduce.converters.output;
+
+import io.apigee.lembos.mapreduce.converters.JSToWritableConverter;
+import io.apigee.lembos.utils.JavaScriptUtils;
+import org.apache.hadoop.io.DoubleWritable;
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Writable;
+import org.mozilla.javascript.Scriptable;
+
+/**
+ * Implementation of {@link JSToWritableConverter} for {@link Double}.
+ */
+public final class DoubleToWritableConverter implements JSToWritableConverter {
+
+    /**
+     * Takes in a {@link Double} and returns the appropriate {@link Writable}.
+     *
+     * <b>Note:</b> Since JavaScript treats all numbers as doubles, we will actually try to return the appropriate
+     * value based on the content of the double.  If it is indeed a double, you'll get a {@link DoubleWritable}.  If
+     * it's really an int, you'll get an {@link IntWritable}.  If it's a long, you'll get a {@link LongWritable}.
+     *
+     * @param scope the JavaScript scope
+     * @param jsObject the value to convert
+     *
+     * @return the appropriate {@link Writable}
+     */
+    @Override
+    public Writable fromJavaScript(final Scriptable scope, final Object jsObject) {
+        final Object javaObject = JavaScriptUtils.fromNumber(jsObject);
+        Writable writable;
+
+        if (javaObject instanceof Double) {
+            writable = new DoubleWritable((Double)javaObject);
+        } else if (javaObject instanceof Integer) {
+            writable = new IntWritable((Integer)javaObject);
+        } else {
+            writable = new LongWritable((Long)javaObject);
+        }
+
+        return writable;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean canConvert(final Object jsObject) {
+        return jsObject instanceof Double;
+    }
+
+}

@@ -1,0 +1,14 @@
+io.apigee.lembos.mapreduce.converters.input.ArrayWritableConverter
+io.apigee.lembos.mapreduce.converters.input.BooleanWritableConverter
+io.apigee.lembos.mapreduce.converters.input.BytesWritableConverter
+io.apigee.lembos.mapreduce.converters.input.ByteWritableConverter
+io.apigee.lembos.mapreduce.converters.input.DoubleWritableConverter
+io.apigee.lembos.mapreduce.converters.input.FloatWritableConverter
+io.apigee.lembos.mapreduce.converters.input.IntWritableConverter
+io.apigee.lembos.mapreduce.converters.input.LongWritableConverter
+io.apigee.lembos.mapreduce.converters.input.MapWritableConverter
+io.apigee.lembos.mapreduce.converters.input.NullWritableConverter
+io.apigee.lembos.mapreduce.converters.input.SortedMapWritableConverter
+io.apigee.lembos.mapreduce.converters.input.TextConverter
+io.apigee.lembos.mapreduce.converters.input.VIntWritableConverter
+io.apigee.lembos.mapreduce.converters.input.VLongWritableConverter

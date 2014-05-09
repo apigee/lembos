@@ -1,0 +1,17 @@
+# use glob syntax.
+syntax: glob
+
+# IDE Files
+.classpath
+.project
+.settings/
+.idea/
+*.iml
+*.ipr
+
+# Maven Files
+target/
+src/test/resources/node_modules/LembosMapReduceRunnerTest-testLibJars/src/target/
+
+# Test Configuration
+src/test/resources/integration-test.properties

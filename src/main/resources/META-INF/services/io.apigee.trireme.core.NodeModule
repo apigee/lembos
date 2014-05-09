@@ -1,0 +1,5 @@
+io.apigee.lembos.node.modules.HadoopConfiguration
+io.apigee.lembos.node.modules.HadoopDistributedCache
+io.apigee.lembos.node.modules.HadoopInput
+io.apigee.lembos.node.modules.HadoopJob
+io.apigee.lembos.node.modules.HadoopOutput
