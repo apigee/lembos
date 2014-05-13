@@ -1,11 +1,15 @@
 package io.apigee.lembos.utils;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.hadoop.conf.Configuration;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Arrays;
+import java.util.Properties;
 
 /**
  * Utilities for testing.
@@ -91,6 +95,42 @@ public class TestUtils {
         } finally {
             Context.exit();
         }
+    }
+
+    public static Configuration getConfiguration() throws IOException {
+        final Properties itProperties = new Properties();
+        final URL propsUrl = TestUtils.class.getResource("/integration-test.properties");
+        String fsDefaultName = null;
+        String jobTracker = null;
+        String userName = null;
+
+        if (propsUrl != null) {
+            itProperties.load(propsUrl.openStream());
+
+            fsDefaultName = itProperties.getProperty("fs.default.name");
+            jobTracker = itProperties.getProperty("mapred.job.tracker");
+            userName = itProperties.getProperty("user.name");
+        }
+
+        if (fsDefaultName == null) {
+            fsDefaultName = System.getProperty("fs.default.name", "hdfs://localhost:54310");
+        }
+
+        if (jobTracker == null) {
+            jobTracker = System.getProperty("mapred.job.tracker", "localhost:54311");
+        }
+
+        if (userName == null) {
+            userName = System.getProperty("user.name");
+        }
+
+        final Configuration conf = new Configuration();
+
+        conf.set("fs.default.name", fsDefaultName);
+        conf.set("mapred.job.tracker", jobTracker);
+        conf.set("hadoop.user", userName);
+
+        return conf;
     }
 
 }

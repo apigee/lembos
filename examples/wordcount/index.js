@@ -26,6 +26,11 @@
 
 var FileInputFormat = require('hadoop-input').FileInputFormat;
 var FileOutputFormat = require('hadoop-output').FileOutputFormat;
+var counterGroup = 'Word Count Counters';
+var uniqueWordCounterName = 'Unique Words';
+var totalWordsCounterName = 'Total Words';
+var uniqueWordsCounter;
+var totalWordsCounter;
 
 module.exports = {
 
@@ -52,6 +57,11 @@ module.exports = {
   map: function (key, value, context, cb) {
     var line = value;
 
+    // Keep track of total words seen
+    if (!totalWordsCounter) {
+      totalWordsCounter = context.getCounter(counterGroup, totalWordsCounterName);
+    }
+
     // Replace all characters that aren't a letter or a hyphen with a space
     line = line.replace(/[^a-zA-Z0-9\-]/g, ' ');
 
@@ -62,6 +72,7 @@ module.exports = {
     line.split(' ').forEach(function (word) {
       // Emit the word and a 1
       context.write(word, 1);
+      totalWordsCounter.increment(1);
     });
 
     // Call the callback
@@ -70,6 +81,13 @@ module.exports = {
 
   reduce: function (key, values, context, cb) {
     var count = 0;
+
+    // Keep track of total words seen
+    if (!uniqueWordsCounter) {
+      uniqueWordsCounter =context.getCounter(counterGroup, uniqueWordCounterName);
+    }
+
+    uniqueWordsCounter.increment(1);
 
     // Sum up the count of this word
     while (values.hasNext()) {

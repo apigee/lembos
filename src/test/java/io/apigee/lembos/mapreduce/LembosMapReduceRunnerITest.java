@@ -12,10 +12,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
-import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
-import java.util.Properties;
 
 import static org.junit.Assert.assertEquals;
 
@@ -31,8 +29,6 @@ public class LembosMapReduceRunnerITest {
     private File tmpModuleContainer;
     private FileSystem fs;
     private String fsDefaultName;
-    private String jobTracker;
-    private String userName;
 
     /**
      * Prepare for each test.
@@ -43,36 +39,10 @@ public class LembosMapReduceRunnerITest {
     public void setUp() throws Exception {
         tmpModuleContainer = Files.createTempDirectory("LembosMapReduceModule").toFile();
 
-        final Properties itProperties = new Properties();
-
-        final URL propsUrl = LembosMapReduceRunnerITest.class.getResource("/integration-test.properties");
-
-        if (propsUrl != null) {
-            itProperties.load(propsUrl.openStream());
-
-            fsDefaultName = itProperties.getProperty("fs.default.name");
-            jobTracker = itProperties.getProperty("mapred.job.tracker");
-            userName = itProperties.getProperty("user.name");
-        }
-
-        if (fsDefaultName == null) {
-            fsDefaultName = System.getProperty("fs.default.name", "hdfs://localhost:54310");
-        }
-
-        if (jobTracker == null) {
-            jobTracker = System.getProperty("mapred.job.tracker", "localhost:54311");
-        }
-
-        if (userName == null) {
-            userName = System.getProperty("user.name");
-        }
-
-        conf = new Configuration();
-
-        conf.set("fs.default.name", fsDefaultName);
-        conf.set("mapred.job.tracker", jobTracker);
+        conf = TestUtils.getConfiguration();
 
         fs = FileSystem.get(conf);
+        fsDefaultName = conf.get("fs.default.name");
 
         if (fsDefaultName.endsWith("/")) {
             fsDefaultName = fsDefaultName.substring(0, fsDefaultName.lastIndexOf("/"));
@@ -242,7 +212,7 @@ public class LembosMapReduceRunnerITest {
                     "-fs",
                     fsDefaultName,
                     "-jt",
-                    jobTracker,
+                    conf.get("mapred.job.tracker"),
                     "-D",
                     LembosConstants.MR_MODULE_NAME + "=wordcount",
                     "-D",
@@ -254,7 +224,7 @@ public class LembosMapReduceRunnerITest {
                     "-D",
                     "mapred.jar=" + System.getProperty("mapred.jar"),
                     "-D",
-                    "HADOOP_USER_NAME=" + userName
+                    "HADOOP_USER_NAME=" + conf.get("hadoop.user")
             });
         } catch (Exception e) {
             e.printStackTrace();

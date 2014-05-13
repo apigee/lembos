@@ -26,7 +26,6 @@ import static org.junit.Assert.assertTrue;
 public class TaskInputOutputContextWrapTest {
 
     private MapDriver<WritableComparable<?>, Writable, WritableComparable<?>, Writable> driver;
-    private LembosMapper mapper;
 
     /**
      * Prepares the tests to run.
@@ -35,10 +34,9 @@ public class TaskInputOutputContextWrapTest {
      */
     @Before
     public void beforeTest() throws Exception {
-        mapper = new LembosMapper();
         driver = new MapDriver<>();
 
-        driver.withMapper(mapper);
+        driver.withMapper(new LembosMapper());
     }
 
     /**
@@ -84,6 +82,25 @@ public class TaskInputOutputContextWrapTest {
         driver.run();
 
         assertEquals("Hello", driver.getConfiguration().get("new.value"));
+    }
+
+    /**
+     * Tests the usage of {@link TaskInputOutputContextWrap#getCounter(Context, Scriptable, Object[], Function)}.
+     *
+     * @throws Exception if anything goes wrong
+     */
+    @Test
+    public void testGetCounter() throws Exception {
+        final String moduleName = "TaskInputOutputContextWrapTest-testGetCounter";
+
+        driver.getConfiguration().set(LembosConstants.MR_MODULE_NAME, moduleName);
+        driver.getConfiguration().set(LembosConstants.MR_MODULE_PATH, TestUtils.getModulePath(moduleName));
+        driver.withAll(ImmutableList.of(
+                new Pair<WritableComparable<?>, Writable>(new Text(Long.toString(new Date().getTime())),
+                                                          new Text("Alice"))
+        ));
+
+        driver.run();
     }
 
 }

@@ -16,14 +16,18 @@
 
 package io.apigee.lembos.node.types;
 
+import io.apigee.lembos.mapreduce.LembosMessages;
 import io.apigee.lembos.utils.ConversionUtils;
+import io.apigee.lembos.utils.JavaScriptUtils;
 import io.apigee.trireme.core.NodeRuntime;
 import io.apigee.trireme.core.Utils;
+import org.apache.hadoop.mapreduce.Counter;
 import org.apache.hadoop.mapreduce.TaskInputOutputContext;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
+import org.mozilla.javascript.Undefined;
 import org.mozilla.javascript.annotations.JSFunction;
 
 import java.io.IOException;
@@ -35,12 +39,13 @@ import java.lang.reflect.InvocationTargetException;
 public final class TaskInputOutputContextWrap extends ScriptableObject {
 
     private static final long serialVersionUID = -458056708802284387L;
-    public static final String CLASS_NAME = "TaskInputOutputContextWrap";
+    public static final String CLASS_NAME = "TaskInputOutputContext";
 
     // These transient fields are to please Findbugs.  I realize why the errors come up but I don't see us ever
     // serializing this object.  It will always be constructed during the MapReduce component setup phase.
 
     private transient TaskInputOutputContext context;
+    private transient NodeRuntime runtime;
 
     private Scriptable scope;
     private Scriptable jsConf;
@@ -75,10 +80,11 @@ public final class TaskInputOutputContextWrap extends ScriptableObject {
             }
 
             final TaskInputOutputContextWrap contextWrapper = (TaskInputOutputContextWrap)ctx.newObject(scope,
-                                                                                                          CLASS_NAME);
+                                                                                                        CLASS_NAME);
 
             contextWrapper.jsConf = ConfigurationWrap.getInstance(runtime, context.getConfiguration());
             contextWrapper.context = context;
+            contextWrapper.runtime = runtime;
             contextWrapper.scope = scope;
 
             return contextWrapper;
@@ -108,12 +114,50 @@ public final class TaskInputOutputContextWrap extends ScriptableObject {
      * @return the configuration wrapper
      */
     @JSFunction
-    @SuppressWarnings({
-            "unchecked" // Unavoidable
-    })
-    public static Scriptable getConfiguration(final Context ctx, final Scriptable thisObj, final Object[] args,
-                                              final Function func) {
+    public static Object getConfiguration(final Context ctx, final Scriptable thisObj, final Object[] args,
+                                          final Function func) {
         return ((TaskInputOutputContextWrap)thisObj).jsConf;
+    }
+
+    /**
+     * Wraps {@link TaskInputOutputContext#getCounter(String, String)}.
+     *
+     * @param ctx the JavaScript context (unused)
+     * @param thisObj the 'this' object of the caller
+     * @param args the arguments for the call (unused)
+     * @param func the function called (unused)
+     *
+     * @return the counter wrapper
+     */
+    @JSFunction
+    public static Object getCounter(final Context ctx, final Scriptable thisObj, final Object[] args,
+                                    final Function func) {
+        final Object arg0 = args.length >= 1 ? args[0] : Undefined.instance;
+        final Object arg1 = args.length >= 2 ? args[1] : Undefined.instance;
+
+        if (args.length == 2) {
+            if (!JavaScriptUtils.isDefined(arg0)) {
+                throw Utils.makeError(ctx, thisObj, LembosMessages.FIRST_ARG_REQUIRED);
+            } else if (!JavaScriptUtils.isDefined(arg1)) {
+                throw Utils.makeError(ctx, thisObj, LembosMessages.SECOND_ARG_REQUIRED);
+            }
+        } else {
+            throw Utils.makeError(ctx, thisObj, LembosMessages.TWO_ARGS_EXPECTED);
+        }
+
+        final TaskInputOutputContextWrap self = (TaskInputOutputContextWrap)thisObj;
+        final Counter counter = self.context.getCounter(arg0.toString(), arg1.toString());
+        CounterWrap counterWrap = null;
+
+        if (counter != null) {
+            try {
+                counterWrap = CounterWrap.getInstance(self.runtime, counter);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return counterWrap == null ? Undefined.instance : counterWrap;
     }
 
     /**

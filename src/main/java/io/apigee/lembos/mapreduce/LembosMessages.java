@@ -27,6 +27,8 @@ public final class LembosMessages {
     public static final String FIRST_ARG_MUST_BE_BOOL_OR_CONF =
             "First argument must be a boolean or a Configuration object";
     public static final String FIRST_ARG_MUST_BE_CONF = "First argument must be a Configuration object";
+    public static final String FIRST_ARG_MUST_BE_COUNTER_GROUP = "First argument must be a CounterGroup object";
+    public static final String FIRST_ARG_MUST_BE_COUNTERS = "First argument must be a Counters object";
     public static final String FIRST_ARG_MUST_BE_JOB = "First argument must be a Job object";
     public static final String FIRST_ARG_MUST_BE_NUM = "First argument must be a number";
     public static final String FIRST_ARG_REQUIRED = "First argument is not optional";

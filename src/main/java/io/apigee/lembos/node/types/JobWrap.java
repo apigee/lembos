@@ -28,6 +28,7 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.RawComparator;
 import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.io.WritableComparable;
+import org.apache.hadoop.mapreduce.Counters;
 import org.apache.hadoop.mapreduce.InputFormat;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.JobID;
@@ -39,6 +40,7 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
+import org.mozilla.javascript.Undefined;
 import org.mozilla.javascript.annotations.JSConstructor;
 import org.mozilla.javascript.annotations.JSFunction;
 
@@ -52,7 +54,6 @@ import java.net.URI;
  * <b>Unsupported APIs:</b>
  * <ul>
  *   <li>{@link Job#failTask(org.apache.hadoop.mapreduce.TaskAttemptID)}</li>
- *   <li>{@link Job#getCounters()}</li>
  *   <li>{@link Job#getCredentials()}</li>
  *   <li>{@link Job#getGroupingComparator()} => getGroupingComparatorClass() (Returns the class name)</li>
  *   <li>{@link Job#getJobID()} => getJobId() (Returns the string representation)</li>
@@ -70,6 +71,8 @@ public final class JobWrap extends ScriptableObject {
     // serializing this object.  It will always be constructed during the MapReduce component setup phase.
 
     private transient Job job;
+    private transient NodeRuntime runtime;
+
     private Scriptable jsConf;
 
     /**
@@ -79,7 +82,7 @@ public final class JobWrap extends ScriptableObject {
      * @param runtime the Node.js runtime
      * @param job the Hadoop job to wrap
      *
-     * @return the created configuration wrapper
+     * @return the created job wrapper
      */
     public static JobWrap getInstance(final NodeRuntime runtime, final Job job) {
         final ModuleRegistry moduleRegistry = ((ScriptRunner)runtime).getRegistry();
@@ -121,6 +124,7 @@ public final class JobWrap extends ScriptableObject {
         });
 
         wrapper.job = job;
+        wrapper.runtime = runtime;
 
         return wrapper;
     }
@@ -177,6 +181,7 @@ public final class JobWrap extends ScriptableObject {
 
         wrapper.job = job;
         wrapper.jsConf = jsConf;
+        wrapper.runtime = (ScriptRunner)ctx.getThreadLocal(ScriptRunner.RUNNER);
 
         return wrapper;
     }
@@ -201,6 +206,37 @@ public final class JobWrap extends ScriptableObject {
         } catch (ClassNotFoundException e) {
             throw Utils.makeError(ctx, thisObj, LembosMessages.CLASS_NOT_FOUND);
         }
+    }
+
+    /**
+     * Wraps {@link Job#getCounters()}.
+     *
+     * @param ctx the JavaScript context (unused)
+     * @param thisObj the 'this' object of the caller
+     * @param args the arguments for the call
+     * @param func the function called (unused)
+     *
+     * @return the counters wrapper
+     */
+    @JSFunction
+    public static Object getCounters(final Context ctx, final Scriptable thisObj, final Object[] args,
+                                     final Function func) {
+        final JobWrap self = (JobWrap)thisObj;
+        Counters counters;
+
+        try {
+            counters = self.job.getCounters();
+        } catch (IOException e) {
+            throw Utils.makeError(ctx, thisObj, e.getMessage());
+        }
+
+        CountersWrap countersWrap = null;
+
+        if (counters != null) {
+            countersWrap = CountersWrap.getInstance(self.runtime, counters);
+        }
+
+        return countersWrap == null ? Undefined.instance : countersWrap;
     }
 
     /**
