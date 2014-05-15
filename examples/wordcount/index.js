@@ -82,9 +82,9 @@ module.exports = {
   reduce: function (key, values, context, cb) {
     var count = 0;
 
-    // Keep track of total words seen
+    // Keep track of unique words seen
     if (!uniqueWordsCounter) {
-      uniqueWordsCounter =context.getCounter(counterGroup, uniqueWordCounterName);
+      uniqueWordsCounter = context.getCounter(counterGroup, uniqueWordCounterName);
     }
 
     uniqueWordsCounter.increment(1);
