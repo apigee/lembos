@@ -5,9 +5,24 @@ least a `map` function.  *(While `map` is the only required function to be expor
 need to expose a `jobSetup` function as well as this is how you will programmatically configure your job.)*  Beyond
 that, your module can be structured however you want.
 
-Below is a complete reference of all supported job properties, their type and if they are functions, their interface.
+## Supported MapReduce Components
 
-**Note:** Anytime you see the word `wrapper` in the documentation below, we are talking about a JavaScript object that
+A typical Java-based MapReduce job is composed of at minimium a Mapper but there are also many other components that
+Hadoop allows you to implement.  At this point, Lembos supports the following MapReduce components, all of which are
+documented below in the API Reference:
+
+* Combiner
+* GroupComparator
+* Mapper
+* Partitioner
+* Reducer
+* SortComparator
+
+## Node.js MapReduce Job API Reference
+
+Below is a complete reference of all supported job properties, their type and if they are functions, their signature.
+
+**Note:** Anytime you see the word `wrapper` in the documentation below we are talking about a JavaScript object that
 mirrors the equivalent Java object.  Below is a list of objects passed to the functions below and the link to their
 respective documentation:
 
@@ -151,7 +166,7 @@ module.exports = {
   partitionSetup: function (conf, cb) { /* ... */ },
 
   /**
-   * Called when the group sorter's close function is first called by Hadoop.
+   * Called when the group sorter's close function is called by Hadoop.
    *
    * @param {object} conf - Hadoop Configuration wrapper
    * @param {function} cb - Completed callback
@@ -180,7 +195,7 @@ module.exports = {
   groupSetup: function (conf, cb) { /* ... */ },
 
   /**
-   * Called when the secondary sorter's close functionis first called by Hadoop.
+   * Called when the secondary sorter's close function is called by Hadoop.
    *
    * @param {object} conf - Hadoop Configuration wrapper
    * @param {function} cb - Completed callback
