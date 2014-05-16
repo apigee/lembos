@@ -3,19 +3,21 @@ Node.js and have them run natively within Hadoop as if written using Java.  The 
 that is intended to be ran via `hadoop jar` just as you would had you written your MapReduce job in Java.  *(Note:
 There is an option to build a standalone executable JAR but that would require you to package up the JAR with the
 necessary Hadoop JARs in a [shaded][shade] JAR.  Since the build would be Hadoop version specific, we're not
-building those right now.  For more details on how to do this, read the [build][building] documentation.)*
+building those right now.  For more details on how to do this, read the **Getting Started (Developer)**
+documentation below.)*
 
 ## Getting Started (User)
 
 First things first, we need to get a build of Lembos.  You can do this by downloading the
-[latest release][latest-release] or by cloning the project and [building it yourself][building].  Once you have a
-Lembos build and you have built your [Node.js MapReduce Job][anatomy-of-a-job], we need to use `hadoop jar` to run the
-Lembos runner.  *(For those of you not familiar with running `hadoop jar`, here is its usage: `hadoop jar <jar>
-[mainClass] args...`)*  Below is an example of how to run the word count example shipped with Lembos:
+[latest release][releases] or by cloning the project and building it yourself.  Once you have a Lembos build and you
+have built your [Node.js MapReduce Job][anatomy-of-a-job], we need to use `hadoop jar` to run the Lembos runner.
+*(For those of you not familiar with running `hadoop jar`, here is its usage: `hadoop jar <jar> [mainClass] args...`)*
+Below is an example of how to run the word count example shipped with Lembos:
 
 ```
 hadoop jar target/lembos-1.0-SNAPSHOT.jar io.apigee.lembos.mapreduce.LembosMapReduceRunner \
-  -D io.apigee.lembos.mapreduce.moduleName=wordcount -D io.apigee.lembos.mapreduce.modulePath=examples/wordcount
+  -D io.apigee.lembos.mapreduce.moduleName=wordcount \
+  -D io.apigee.lembos.mapreduce.modulePath=examples/wordcount
 ```
 
 It's that simple but before moving on, let's make sure we know what is going on here.  The Lembos runner, and runtime,
@@ -36,6 +38,7 @@ development process.  As with most Maven projects, the commands are pretty stand
 * `mvn integration-test`: Run the integration tests *(Requires a running Hadoop instance to connect to)*
 * `mvn site`: Build the Maven project documentation *(Most useful when ran after `mvn test` or `mvn integration-test`
 as the code coverage reports will be built)*
+* `mvn package`: Build a JAR file of Lembos
 
 If you're building against Lembos, the project is submitted to Maven central so you just need to update your `pom.xml`
 to have something like this in your dependencies:
@@ -61,8 +64,7 @@ resources that can help explain what is going on:
 * [Lembos Command Line Interface][lembos-cli]
 
 [anatomy-of-a-job]: https://github.com/apigee/lembos/blob/master/docs/Anatomy_of_a_NodeJS_MapReduce_Job.md
-[building]: https://github.com/apigee/lembos/blob/master/docs/Building.md
-[latest-release]: https://github.com/apigee/lembos
+[releases]: https://github.com/apigee/lembos/releases
 [lembos-architecture]: https://github.com/apigee/lembos/blob/master/docs/Lembos_Architecture.md
 [lembos-cli]: https://github.com/apigee/lembos/blob/master/docs/Lembos_CLI.md
 [mapreduce]: http://en.wikipedia.org/wiki/MapReduce
