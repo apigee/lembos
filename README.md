@@ -65,7 +65,7 @@ called.)*
 Step `#4` above is extremely important here and requires a little more detail.  Whenever Hadoop calls the Java-based
 method corresponding to the MapReduce component, the Lembos runtime performs the following steps:
 
-1. Give the Java inputs, a Java -> JavaScript converter will convert the Java input value to a JavaScript equivalent
+1. Given the Java inputs, a Java -> JavaScript converter will convert the Java input value to a JavaScript equivalent
 2. Call the corresponding Node.js job method with the appropriately converted values and a callback
 3. Await the callback to be called
 
