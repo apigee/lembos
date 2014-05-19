@@ -326,7 +326,7 @@ public final class JobWrap extends ScriptableObject {
      * @return the job id
      */
     @JSFunction
-    public static Object getJobId(final Context ctx, final Scriptable thisObj, final Object[] args,
+    public static Object getJobID(final Context ctx, final Scriptable thisObj, final Object[] args,
                                   final Function func) {
         final JobID jobId = ((JobWrap)thisObj).job.getJobID();
 
