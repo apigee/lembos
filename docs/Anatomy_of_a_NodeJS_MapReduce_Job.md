@@ -7,7 +7,7 @@ that, your module can be structured however you want.
 
 ## Supported MapReduce Components
 
-A typical Java-based MapReduce job is composed of at minimium a Mapper but there are also many other components that
+A typical Java-based MapReduce job is composed of at minimum a Mapper but there are also many other components that
 Hadoop allows you to implement.  At this point, Lembos supports the following MapReduce components, all of which are
 documented below in the API Reference:
 

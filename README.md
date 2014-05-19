@@ -29,7 +29,7 @@ your job definition, the job will be configured and submitted to the Hadoop clus
 
 ## Getting Started (Developer)
 
-If you are interestd in contributing to Lembos or you need to build against Lembos, the process is pretty straight
+If you are interested in contributing to Lembos or you need to build against Lembos, the process is pretty straight
 forward.  As with any GitHub project, just clone the project.  Here is the full Git command to save you some trouble:
 `git clone https://github.com/apigee/lembos.git`.  At this point, you'll notice that we're using [Maven][maven] for our
 development process.  As with most Maven projects, the commands are pretty standard:
