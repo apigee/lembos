@@ -11,11 +11,12 @@ documentation below.)*
 First things first, we need to get a build of Lembos.  You can do this by downloading the
 [latest release][releases] or by cloning the project and building it yourself.  Once you have a Lembos build and you
 have built your [Node.js MapReduce Job][anatomy-of-a-job], we need to use `hadoop jar` to run the Lembos runner.
-*(For those of you not familiar with running `hadoop jar`, here is its usage: `hadoop jar <jar> [mainClass] args...`)*
-Below is an example of how to run the word count example shipped with Lembos:
+*(For those of you not familiar with running `hadoop jar`, here is its usage:
+`hadoop jar <jar> [generic options] [application args/options]...`)*  Below is an example of how to run the word count
+example shipped with Lembos:
 
 ```
-hadoop jar target/lembos-1.0-SNAPSHOT.jar io.apigee.lembos.mapreduce.LembosMapReduceRunner \
+hadoop jar target/lembos-1.0-SNAPSHOT.jar \
   -D io.apigee.lembos.mapreduce.moduleName=wordcount \
   -D io.apigee.lembos.mapreduce.modulePath=examples/wordcount
 ```

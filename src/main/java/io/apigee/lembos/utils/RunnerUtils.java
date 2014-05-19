@@ -20,6 +20,7 @@ import io.apigee.lembos.mapreduce.LembosConstants;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.FileUtil;
+import org.apache.hadoop.fs.FsUrlStreamHandlerFactory;
 import org.apache.hadoop.util.GenericOptionsParser;
 
 import java.io.File;
@@ -206,6 +207,27 @@ public final class RunnerUtils {
         }
 
         return localTempModule;
+    }
+
+    /**
+     * Loads the {@link FsUrlStreamHandlerFactory}.
+     *
+     * @param conf the configuration to use
+     *
+     * @throws IOException if something goes wrong
+     */
+    public static void loadFsUrlStreamHandler(final Configuration conf) throws IOException {
+        // Here to avoid https://issues.apache.org/jira/browse/HADOOP-9041
+        FileSystem.get(conf);
+
+        // Hook up the HDFS URL scheme handler
+        // noinspection ErrorNotRethrown
+        try {
+            URL.setURLStreamHandlerFactory(new FsUrlStreamHandlerFactory());
+        } catch (final Error e) {
+            // This can happen if the handler has already been loaded so ignore
+            System.err.println("The HDFS URL scheme handler has already been loaded");
+        }
     }
 
 }

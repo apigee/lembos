@@ -1,5 +1,10 @@
 # Lembos Command Line Interface
 
+**Note:** The JAR packaging of Lembos is configured to have a main class in the JAR manifest.  This is to make using
+`hadoop jar` easier and it is not intended for you to use via `java -jar`.  If you do try to execute the JAR using
+`java -jar`, it will not work as the JAR does not include the Hadoop classes necessary to run.  To summarize, you
+**must** use `hadoop jar` to run Lembos.
+
 The Lembos `runner` is an implementation of the standard [Hadoop Tool][hadoop-tool] interface.  The Hadoop Tool
 interface is a simple contract that allows all adhering to it the same capabilities, like configuring your Hadoop job,
 Hadoop cluster environment, etc. the same.  So [Hadoop Streaming][hadoop-streaming] and Lembos have a
@@ -15,7 +20,7 @@ The way the Hadoop Tool interface works is this can be done a few ways.  You can
 command line like this:
 
 ```
-hadoop jar target/lembos-1.0-SNAPSHOT.jar io.apigee.lembos.mapreduce.LembosMapReduceRunner \
+hadoop jar target/lembos-1.0-SNAPSHOT.jar \
   -D io.apigee.lembos.mapreduce.moduleName=wordcount -D io.apigee.lembos.mapreduce.modulePath=examples/wordcount
 ```
 

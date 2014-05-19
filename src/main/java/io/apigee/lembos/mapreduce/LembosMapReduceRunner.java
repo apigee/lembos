@@ -22,7 +22,6 @@ import io.apigee.lembos.utils.JavaScriptUtils;
 import io.apigee.lembos.utils.RunnerUtils;
 import io.apigee.trireme.core.NodeException;
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.FsUrlStreamHandlerFactory;
 import org.apache.hadoop.io.BooleanWritable;
 import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.FloatWritable;
@@ -37,7 +36,6 @@ import org.apache.hadoop.util.ToolRunner;
 import org.mozilla.javascript.Scriptable;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -51,17 +49,6 @@ public class LembosMapReduceRunner implements Tool {
     private Configuration conf;
     private LembosMapReduceEnvironment mrEnv;
     private Scriptable jobWrapper;
-
-    static {
-        // Hook up the HDFS URL scheme handler
-        // noinspection ErrorNotRethrown
-        try {
-            URL.setURLStreamHandlerFactory(new FsUrlStreamHandlerFactory());
-        } catch (final Error e) {
-            // This can happen if the handler has already been loaded so ignore
-            System.err.println("The HDFS URL scheme handler has already been loaded");
-        }
-    }
 
     /**
      * CLI entry point.
@@ -103,6 +90,9 @@ public class LembosMapReduceRunner implements Tool {
         if (conf == null) {
             setConf(gop.getConfiguration());
         }
+
+        // Load the Hadoop FS URL handler
+        RunnerUtils.loadFsUrlStreamHandler(getConf());
 
         // Persist the non-Runner CLI arguments
         conf.setStrings(LembosConstants.MR_MODULE_ARGS, gop.getRemainingArgs());

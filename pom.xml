@@ -86,6 +86,7 @@
       <groupId>org.apache.hadoop</groupId>
       <artifactId>hadoop-core</artifactId>
       <version>${hadoop.version}</version>
+      <scope>provided</scope>
     </dependency>
 
     <!-- Test Dependencies -->

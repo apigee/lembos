@@ -20,7 +20,7 @@ Feel free to update your version of the command above to work against whatever H
 
 To run the example, we have to tell lembos what the name of our Node.js module is and where to find it
 locally.  To do this, run the following:
-`java -jar target/lembos-{LEMBOS_VERSION}.jar \
+`hadoop jar target/lembos-{LEMBOS_VERSION}.jar \
 -D io.apigee.lembos.mapreduce.moduleName=wordcount \
 -D io.apigee.lembos.mapreduce.modulePath={FULL_PATH_TO_LEMBOS_SOURCE_ROOT}/examples/wordcount/`
 
