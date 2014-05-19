@@ -148,7 +148,6 @@
       </plugin>
 
       <!-- Build a fat JAR (All dependencies are built into the JAR) -->
-      <!-- Usage details: http://maven.apache.org/plugins/maven-shade-plugin/usage.html -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
@@ -175,7 +174,6 @@
       </plugin>
 
       <!-- Version the JAR using the JAR manifest -->
-      <!-- Usage details: http://maven.apache.org/plugins/maven-jar-plugin/usage.html -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
@@ -202,7 +200,6 @@
       </plugin>
 
       <!-- Configure failsafe to include the integration tests -->
-      <!-- TODO: Get the integration tests to startup embedded Hadoop -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
@@ -226,6 +223,49 @@
             </property>
           </systemProperties>
         </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.2.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.9.1</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
 
       <!-- Reporting Plugins (Configured in the reporting section as well) -->
@@ -260,13 +300,6 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
-
-      <!-- Javadoc -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.9.1</version>
       </plugin>
 
       <!-- Site -->
