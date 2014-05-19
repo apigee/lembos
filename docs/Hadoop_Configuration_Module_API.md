@@ -3,6 +3,8 @@ The purpose of the `hadoop-configuration` module is to provide programmatic acce
 
 ## Configuration
 
+For example usage of all available APIs, please see the [unit tests][hadoop-configuration-tests].
+
 ```javascript
 /**
  * Represents a Hadoop Configuration.
@@ -253,3 +255,4 @@ Configuration.prototype.size = function () { /* ... */ };
 ```
 
 [hadoop-configuration]: http://hadoop.apache.org/docs/r1.0.4/api/org/apache/hadoop/conf/Configuration.html
+[hadoop-configuration-tests]: https://github.com/apigee/lembos/blob/master/src/test/resources/node_modules/HadoopConfigurationTest-testHadoopConfiguration/index.js
