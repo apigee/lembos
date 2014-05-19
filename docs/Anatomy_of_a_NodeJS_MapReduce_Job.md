@@ -22,17 +22,6 @@ documented below in the API Reference:
 
 Below is a complete reference of all supported job properties, their type and if they are functions, their signature.
 
-**Note:** Anytime you see the word `wrapper` in the documentation below we are talking about a JavaScript object that
-mirrors the equivalent Java object.  Below is a list of objects passed to the functions below and the link to their
-respective documentation:
-
-* Hadoop Configuration wrapper
-* Hadoop Job wrapper
-* Hadoop TaskInputOutputContext wrapper
-* Iterator
-
-**TODO:** Update the list above to be links to the corresponding documentation
-
 ```javascript
 // The module must export an object with the naming described below
 module.exports = {

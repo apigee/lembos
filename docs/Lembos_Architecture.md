@@ -137,6 +137,10 @@ and their appropriate APIs.  Below is a list of Node.js modules provided to you 
 * `hadoop-output`: Provides access to the various Hadoop OutputFormat implementation objects
 *([API documentation][hadoop-output-api])*
 
+The first pass at these APIs was to provide a one-to-one mapping of Java-based APIs to JavaScript as that will be allow
+for consistency between Java MapReduce jobs and Node.js MapReduce jobs.  Going forward we would like to create
+abstractions and APIs that are more JavaScript/Node.js oriented.
+
 It is important to note that at this time, you can only access the modules when using the Java-based Lembos runner.
 We are currently working on figuring out a way to access these modules in a pure JavaScript Node.js module without
 Lembos for unit testing and such.
