@@ -51,7 +51,7 @@ module.exports = {
   /**
    * Called when the mapper's cleanup function is called by Hadoop.
    *
-   * @param {object} context - Hadoop TaskInputOutputContext wrapper
+   * @param {TaskInputOutputContext} context - The Hadoop task context
    * @param {function} cb - Completed callback
    */
   mapCleanup: function (context, cb) { /* ... */ },
@@ -61,7 +61,7 @@ module.exports = {
    *
    * @param {?} key - Map key (Converted WritableComparable to JavaScript)
    * @param {?} value - Map value (Converted Writable to JavaScript)
-   * @param {object} context - Hadoop TaskInputOutputContext wrapper
+   * @param {TaskInputOutputContext} context - The Hadoop task context
    * @param {function} cb - Completed callback
    */
   map: function (key, value, context, cb) { /* ... */ },
@@ -69,7 +69,7 @@ module.exports = {
   /**
    * Called when the mapper's setup function is called by Hadoop.
    *
-   * @param {object} context - Hadoop TaskInputOutputContext wrapper
+   * @param {TaskInputOutputContext} context - The Hadoop task context
    * @param {function} cb - Completed callback
    */
   mapSetup: function (context, cb) { /* ... */ },
@@ -77,7 +77,7 @@ module.exports = {
   /**
    * Called when the reducer's cleanup function is called by Hadoop.
    *
-   * @param {object} context - Hadoop TaskInputOutputContext wrapper
+   * @param {TaskInputOutputContext} context - The Hadoop task context
    * @param {function} - Completed callback
    */
   reduceCleanup: function (context, cb) { /* ... */ },
@@ -86,8 +86,8 @@ module.exports = {
    * Called when the reducer's reduce function is called by Hadoop.
    *
    * @param {?} key - Reduce key (Converted WritableComparable to JavaScript)
-   * @param {object} values - Reduce values (Iterator)
-   * @param {object} context - Hadoop TaskInputOutputContext wrapper
+   * @param {Iterator} values - Reduce values
+   * @param {TaskInputOutputContext} context - The Hadoop task context
    * @param {function} cb - Completed callback
    */
   reduce: function (key, values, context, cb) { /* ... */ },
@@ -95,7 +95,7 @@ module.exports = {
   /**
    * Called when the reducer's setup function is called by Hadoop.
    *
-   * @param {object} context - Hadoop TaskInputOutputContext wrapper
+   * @param {TaskInputOutputContext} context - The Hadoop task context
    * @param {function} cb - Completed callback
    */
   reduceSetup: function (context, cb) { /* ... */ },
@@ -103,7 +103,7 @@ module.exports = {
   /**
    * Called when the combiner's cleanup function is called by Hadoop.
    *
-   * @param {object} context - Hadoop TaskInputOutputContext wrapper
+   * @param {TaskInputOutputContext} context - The Hadoop task context
    * @param {function} cb - Completed callback
    */
   combineCleanup: function (context, cb) { /* ... */ },
@@ -112,8 +112,8 @@ module.exports = {
    * Called when the combiner's combine function is called by Hadoop.
    *
    * @param {?} key - Combine key (Converted WritableComparable to JavaScript)
-   * @param {object} values - Combine values (Iterator)
-   * @param {object} context - Hadoop TaskInputOutputContext wrapper
+   * @param {Iterator} values - Combine values
+   * @param {TaskInputOutputContext} context - The Hadoop task context
    * @param {function} cb - Completed callback
    */
   combine: function (key, values, context, cb) { /* ... */ },
@@ -121,7 +121,7 @@ module.exports = {
   /**
    * Called when the combiner's setup function is called by Hadoop.
    *
-   * @param {object} context - Hadoop TaskInputOutputContext wrapper
+   * @param {TaskInputOutputContext} context - The Hadoop task context
    * @param {function} cb - Completed callback
    */
   combineSetup: function (context, cb) { /* ... */ },
@@ -129,7 +129,7 @@ module.exports = {
   /**
    * Called when the partitioner's close function is called by Hadoop.
    *
-   * @param {object} context - Hadoop TaskInputOutputContext wrapper
+   * @param {TaskInputOutputContext} context - The Hadoop task context
    * @param {function} cb - Completed callback
    */
   partitionCleanup: function (conf, cb) { /* ... */ },
