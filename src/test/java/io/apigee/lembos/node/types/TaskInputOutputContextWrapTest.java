@@ -40,14 +40,13 @@ public class TaskInputOutputContextWrapTest {
     }
 
     /**
-     * Tests the usage of {@link TaskInputOutputContextWrap#write(Context, Scriptable, Object[], Function)} with the wrong
-     * number of arguments.
+     * Tests the usage of {@link TaskInputOutputContextWrap}.
      *
      * @throws Exception if anything goes wrong
      */
     @Test
-    public void testWriteWithWrongNumberOfArguments() throws Exception {
-        final String moduleName = "TaskInputOutputContextWrapTest-testWriteWithWrongNumberOfArguments";
+    public void testTaskInputOutputContext() throws Exception {
+        final String moduleName = "TaskInputOutputContextWrapTest-testTaskInputOutputContext";
 
         driver.getConfiguration().set(LembosConstants.MR_MODULE_NAME, moduleName);
         driver.getConfiguration().set(LembosConstants.MR_MODULE_PATH, TestUtils.getModulePath(moduleName));
@@ -56,50 +55,7 @@ public class TaskInputOutputContextWrapTest {
                                                           new Text("Alice"))
         ));
 
-        try {
-            driver.run();
-        } catch (Exception e) {
-            assertTrue(e.getMessage().contains("Two arguments expected"));
-        }
-    }
-
-    /**
-     * Tests the usage of {@link TaskInputOutputContextWrap#getConfiguration(Context, Scriptable, Object[], Function)}.
-     *
-     * @throws Exception if anything goes wrong
-     */
-    @Test
-    public void testGetConfiguration() throws Exception {
-        final String moduleName = "TaskInputOutputContextWrapTest-testGetConfiguration";
-
-        driver.getConfiguration().set(LembosConstants.MR_MODULE_NAME, moduleName);
-        driver.getConfiguration().set(LembosConstants.MR_MODULE_PATH, TestUtils.getModulePath(moduleName));
-        driver.withAll(ImmutableList.of(
-                new Pair<WritableComparable<?>, Writable>(new Text(Long.toString(new Date().getTime())),
-                                                          new Text("Alice"))
-        ));
-
-        driver.run();
-
-        assertEquals("Hello", driver.getConfiguration().get("new.value"));
-    }
-
-    /**
-     * Tests the usage of {@link TaskInputOutputContextWrap#getCounter(Context, Scriptable, Object[], Function)}.
-     *
-     * @throws Exception if anything goes wrong
-     */
-    @Test
-    public void testGetCounter() throws Exception {
-        final String moduleName = "TaskInputOutputContextWrapTest-testGetCounter";
-
-        driver.getConfiguration().set(LembosConstants.MR_MODULE_NAME, moduleName);
-        driver.getConfiguration().set(LembosConstants.MR_MODULE_PATH, TestUtils.getModulePath(moduleName));
-        driver.withAll(ImmutableList.of(
-                new Pair<WritableComparable<?>, Writable>(new Text(Long.toString(new Date().getTime())),
-                                                          new Text("Alice"))
-        ));
-
+        // Call JavaScript-based Tests
         driver.run();
     }
 
