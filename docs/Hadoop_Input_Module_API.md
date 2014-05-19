@@ -55,7 +55,7 @@ DataDrivenDBInputFormat.setBoundingQuery = function (conf, query) { /* ... */ };
 
 ## DBInputFormat
 
-For example usage of all available APIs, please see the [unit tests][hadoop-dbinputformat-tests].
+For example usage of all available APIs, please see the [unit tests][hadoop-input-dbinputformat-tests].
 
 ```javascript
 /**
@@ -326,11 +326,11 @@ var TextInputFormat = {};
 
 [hadoop-combinefileinputformat]: http://hadoop.apache.org/docs/r1.0.4/api/org/apache/hadoop/mapreduce/lib/input/CombineFileInputFormat.html
 [hadoop-datadrivendbinputformat]: http://hadoop.apache.org/docs/r1.0.4/api/org/apache/hadoop/mapreduce/lib/db/DataDrivenDBInputFormat.html
-[hadoop-dbinputformat-tests]: https://github.com/apigee/lembos/blob/master/src/test/resources/node_modules/HadoopInputTest-testDBInputFormat/index.js
 [hadoop-dbinputformat]: http://hadoop.apache.org/docs/r1.0.4/api/org/apache/hadoop/mapreduce/lib/db/DBInputFormat.html
 [hadoop-fileinputformat]: http://hadoop.apache.org/docs/r1.0.4/api/org/apache/hadoop/mapreduce/lib/input/FileInputFormat.html
 [hadoop-input-combinefileinputformat-tests]: https://github.com/apigee/lembos/blob/master/src/test/resources/node_modules/HadoopInputTest-testCombineFileInputFormat/index.js
 [hadoop-input-datbasedrivendbinputformat-tests]: https://github.com/apigee/lembos/blob/master/src/test/resources/node_modules/HadoopInputTest-testDataDrivenDBInputFormat/index.js
+[hadoop-input-dbinputformat-tests]: https://github.com/apigee/lembos/blob/master/src/test/resources/node_modules/HadoopInputTest-testDBInputFormat/index.js
 [hadoop-input-fileinputformat-tests]: https://github.com/apigee/lembos/blob/master/src/test/resources/node_modules/HadoopInputTest-testFileInputFormat/index.js
 [hadoop-input-keyvaluetextinputformat-tests]: https://github.com/apigee/lembos/blob/master/src/test/resources/node_modules/HadoopInputTest-testKeyValueTextInputFormat/index.js
 [hadoop-input-nlineinputformat-tests]: https://github.com/apigee/lembos/blob/master/src/test/resources/node_modules/HadoopInputTest-testNLineInputFormat/index.js
