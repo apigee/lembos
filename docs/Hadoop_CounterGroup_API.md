@@ -32,7 +32,7 @@ CounterGroup.prototype.getDisplayName = function () { /* ... */ };
 CounterGroup.prototype.getName = function () { /* ... */ };
 
 /**
- * Increment all counters in this group by the values of the counters in the provided group.
+ * Increments multiple counters by their amounts in another CounterGroup instance.
  *
  * @param {CounterGroup} other - The other group of counters
  *
