@@ -156,7 +156,7 @@ are not available from a module:
 * `Counter` *([API documentation][hadoop-counter-api])*
 * `CounterGroup` *([API documentation][hadoop-countergroup-api])*
 * `Counters` *([API documentation][hadoop-counters-api])*
-* `Iterator` *([API documentation][iterator-api])*
+* `Iterator` *([API documentation][java-iterator-api])*
 * `TaskInputOutputContext` *([API documentation][hadoop-taskinputoutputcontext-api])*
 
 [hadoop-counter-api]: https://github.com/apigee/lembos/blob/master/docs/Hadoop_Counter_API.md
@@ -169,6 +169,6 @@ are not available from a module:
 [hadoop-output-api]: https://github.com/apigee/lembos/blob/master/docs/Hadoop_Output_Module_API.md
 [hadoop-taskinputoutputcontext-api]: https://github.com/apigee/lembos/blob/master/docs/Hadoop_TaskInputOutputContext_API.md
 [input-src]: https://github.com/apigee/lembos/tree/master/src/main/java/io/apigee/lembos/mapreduce/converters/input
-[iterator-api]: https://github.com/apigee/lembos/blob/master/docs/Iterator_API.md
+[java-iterator-api]: https://github.com/apigee/lembos/blob/master/docs/Java_Iterator_API.md
 [output-src]: https://github.com/apigee/lembos/tree/master/src/main/java/io/apigee/lembos/mapreduce/converters/output
 [trireme]: https://github.com/apigee/trireme
