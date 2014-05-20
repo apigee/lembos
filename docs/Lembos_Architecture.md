@@ -71,6 +71,36 @@ There were a number of things mentioned above that need more detail, like input/
 asynchronous code is handled.  There are also some things that have not yet been mentioned like how Hadoop APIs are
 accessed from within your Node.js module.  Below is the information necessary to fill in the gaps.
 
+### Command Line Arguments
+
+Sometimes you will want to pass arguments/options to your Node.js code and Lembos handles this very simply.  The usage
+pattern for running Lembos is using `hadoop jar {LEMBOS_JAR} [hadoop options] [application options]`.  If you adhere to
+this model, anything that is not a Hadoop argument will be passed to Node.js so that you can use `process.argv` just as
+you would had you invoked your Node.js code from the command line.  So for example, if I were to run Lembos using this:
+
+`hadoop jar target/lembos-1.0-SNAPSHOT.jar \
+  -D io.apigee.lembos.mapreduce.moduleName=wordcount \
+  -D io.apigee.lembos.mapreduce.modulePath=examples/wordcount \
+  -flag0 --opt0 val0 arg0
+`
+
+`process.argv` would look like this:
+
+`
+[ './node',
+  'Lembos-Node-Wrapper-3618924926057998904.js',
+  '-flag0',
+  '--opt0',
+  'val0',
+  'arg0' ]
+`
+
+This means you can use existing Node.js patterns and tooling, like [minimist][minimist], to process your CLI arguments.
+
+**Note:** We create a wrapper script that will import your module and the naming convention for that file is
+`Lembos-Node-Wrapper-{timestamp_job_created}.js` so the second array entry for `process.argv` will be similar but not
+the same.
+
 ### Handling Asynchronous JavaScript Code
 
 MapReduce components operate in a synchronous fashion.  When a Hadoop Mapper is processing data, it will fully process
@@ -170,5 +200,6 @@ are not available from a module:
 [hadoop-taskinputoutputcontext-api]: https://github.com/apigee/lembos/blob/master/docs/types/Hadoop_TaskInputOutputContext_API.md
 [input-src]: https://github.com/apigee/lembos/tree/master/src/main/java/io/apigee/lembos/mapreduce/converters/input
 [java-iterator-api]: https://github.com/apigee/lembos/blob/master/docs/types/Java_Iterator_API.md
+[minimist]: https://github.com/substack/minimist
 [output-src]: https://github.com/apigee/lembos/tree/master/src/main/java/io/apigee/lembos/mapreduce/converters/output
 [trireme]: https://github.com/apigee/trireme

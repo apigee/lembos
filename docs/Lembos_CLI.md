@@ -5,6 +5,8 @@
 `java -jar`, it will not work as the JAR does not include the Hadoop classes necessary to run.  To summarize, you
 **must** use `hadoop jar` to run Lembos.
 
+**Note:** Here is the `hadoop jar` usage: `hadoop jar {LEMBOS_JAR} [hadoop options] [application options]`
+
 The Lembos `runner` is an implementation of the standard [Hadoop Tool][hadoop-tool] interface.  The Hadoop Tool
 interface is a simple contract that allows all adhering to it the same capabilities, like configuring your Hadoop job,
 Hadoop cluster environment, etc. the same.  So [Hadoop Streaming][hadoop-streaming] and Lembos have a
@@ -21,7 +23,8 @@ command line like this:
 
 ```
 hadoop jar target/lembos-1.0-SNAPSHOT.jar \
-  -D io.apigee.lembos.mapreduce.moduleName=wordcount -D io.apigee.lembos.mapreduce.modulePath=examples/wordcount
+  -D io.apigee.lembos.mapreduce.moduleName=wordcount \
+  -D io.apigee.lembos.mapreduce.modulePath=examples/wordcount
 ```
 
 Or you could have those values set in your Hadoop job configuration file and use the `-conf` CLI option.  Either way,
