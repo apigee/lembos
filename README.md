@@ -1,6 +1,6 @@
 Lembos a Java-based library that provides an ecosystem allowing you to write your [MapReduce][mapreduce] jobs using
 Node.js and have them run natively within Hadoop as if written using Java.  The project is packaged as a JAR file
-that is intended to be ran via `hadoop jar` just as you would had you written your MapReduce job in Java.  *(Note:
+that is intended to be run via `hadoop jar` just as you would have you written your MapReduce job in Java.  *(Note:
 There is an option to build a standalone executable JAR but that would require you to package up the JAR with the
 necessary Hadoop JARs in a [shaded][shade] JAR.  Since the build would be Hadoop version specific, we're not
 building those right now.  For more details on how to do this, read the **Getting Started (Developer)**
@@ -26,27 +26,27 @@ hadoop jar target/lembos-1.1-SNAPSHOT.jar \
 ```
 
 It's that simple but before moving on, let's make sure we know what is going on here.  The Lembos runner, and runtime,
-use the two Hadoop configuration properties above.  They are required an there is no way about it.
+use the two Hadoop configuration properties above.  These are required properties.
 `io.apigee.lembos.mapreduce.moduleName` is used to specify the name of the module, used by the Lembos runtime to load
 your module, and `io.apigee.lembos.mapreduce.modulePath` is used to specify the path to your module.  *(Note: The path
-can be an HDFS URL or a local filesystem path.)*  At this point, the Lembos runner will load your module and based on
-your job definition, the job will be configured and submitted to the Hadoop cluster.
+can be an HDFS URL or a local filesystem path.)*  At this point, the Lembos runner loads your module and based on
+your job definition, the job is configured and submitted to the Hadoop cluster.
 
 ## Getting Started (Developer)
 
 If you are interested in contributing to Lembos or you need to build against Lembos, the process is pretty straight
 forward.  As with any GitHub project, just clone the project.  Here is the full Git command to save you some trouble:
-`git clone https://github.com/apigee/lembos.git`.  At this point, you'll notice that we're using [Maven][maven] for our
-development process.  As with most Maven projects, the commands are pretty standard:
+`git clone https://github.com/apigee/lembos.git`.  We use [Maven][maven] for our
+build process.  As with most Maven projects, the commands are pretty standard:
 
-* `mvn test`: Run the unit tests *(Does not requiring a running Hadoop instance)*
+* `mvn test`: Run the unit tests *(Does not require a running Hadoop instance)*
 * `mvn integration-test`: Run the integration tests *(Requires a running Hadoop instance to connect to)*
 * `mvn site`: Build the Maven project documentation *(Most useful when ran after `mvn test` or `mvn integration-test`
 as the code coverage reports will be built)*
 * `mvn package`: Build a JAR file of Lembos
 
 If you're building against Lembos, the project is submitted to Maven central so you just need to update your `pom.xml`
-to have something like this in your dependencies:
+to have following dependency:
 
 ```xml
 <!-- ... -->
@@ -60,8 +60,8 @@ to have something like this in your dependencies:
 
 ## Further Reading
 
-While running the Lembos runner is quite simple, there is a lot going on behind the scenes that is not explained above.
-Most of this is related to how Hadoop works and we've documented the important stuff.  Below is a list of useful
+While running the Lembos runner is quite simple, a lot happen behind the scenes that are not explained above.
+Most of these are related to how Hadoop works and we've documented the important stuff.  Below is a list of useful
 resources that can help explain what is going on:
 
 * [Anatomy of a Node.js MapReduce Job][anatomy-of-a-job]
