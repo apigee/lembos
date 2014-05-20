@@ -1,6 +1,6 @@
 # Anatomy of a Node.js MapReduce Job
 
-The interface Lembos requires for your Node.js module is that it must export an object and that object must contain at
+Lembos requires your Node.js module to export an object and that object must contain at
 least a `map` function.  *(While `map` is the only required function to be exported, it is highly likely that you will
 need to expose a `jobSetup` function as well as this is how you will programmatically configure your job.)*  Beyond
 that, your module can be structured however you want.
