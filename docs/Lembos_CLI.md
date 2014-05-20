@@ -22,7 +22,7 @@ The way the Hadoop Tool interface works is this can be done a few ways.  You can
 command line like this:
 
 ```
-hadoop jar target/lembos-1.0-SNAPSHOT.jar \
+hadoop jar target/lembos-1.1-SNAPSHOT.jar \
   -D io.apigee.lembos.mapreduce.moduleName=wordcount \
   -D io.apigee.lembos.mapreduce.modulePath=examples/wordcount
 ```

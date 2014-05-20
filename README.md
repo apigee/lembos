@@ -6,17 +6,21 @@ necessary Hadoop JARs in a [shaded][shade] JAR.  Since the build would be Hadoop
 building those right now.  For more details on how to do this, read the **Getting Started (Developer)**
 documentation below.)*
 
+## Release Notes
+
+Lembos uses the GitHub Releases for release notes and binary downloads and they are located [here][release-notes].
+
 ## Getting Started (User)
 
 First things first, we need to get a build of Lembos.  You can do this by downloading the
-[latest release][releases] or by cloning the project and building it yourself.  Once you have a Lembos build and you
-have built your [Node.js MapReduce Job][anatomy-of-a-job], we need to use `hadoop jar` to run the Lembos runner.
+[latest release][latest-release] or by cloning the project and building it yourself.  Once you have a Lembos build and
+you have built your [Node.js MapReduce Job][anatomy-of-a-job], we need to use `hadoop jar` to run the Lembos runner.
 *(For those of you not familiar with running `hadoop jar`, here is its usage:
 `hadoop jar <jar> [generic options] [application args/options]...`)*  Below is an example of how to run the word count
 example shipped with Lembos:
 
 ```
-hadoop jar target/lembos-1.0-SNAPSHOT.jar \
+hadoop jar target/lembos-1.1-SNAPSHOT.jar \
   -D io.apigee.lembos.mapreduce.moduleName=wordcount \
   -D io.apigee.lembos.mapreduce.modulePath=examples/wordcount
 ```
@@ -49,7 +53,7 @@ to have something like this in your dependencies:
 <dependency>
   <groupId>io.apigee.lembos</groupId>
   <artifactId>lembos</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.1-SNAPSHOT</version>
 </dependency>
 <!-- ... -->
 ```
@@ -65,9 +69,10 @@ resources that can help explain what is going on:
 * [Lembos Command Line Interface][lembos-cli]
 
 [anatomy-of-a-job]: https://github.com/apigee/lembos/blob/master/docs/Anatomy_of_a_NodeJS_MapReduce_Job.md
-[releases]: https://github.com/apigee/lembos/releases
+[latest-release]: https://github.com/apigee/lembos/releases/download/lembos-1.0/lembos-1.0.jar
 [lembos-architecture]: https://github.com/apigee/lembos/blob/master/docs/Lembos_Architecture.md
 [lembos-cli]: https://github.com/apigee/lembos/blob/master/docs/Lembos_CLI.md
 [mapreduce]: http://en.wikipedia.org/wiki/MapReduce
 [maven]: http://maven.apache.org/
+[release-notes]: https://github.com/apigee/lembos/releases
 [shade]: http://maven.apache.org/plugins/maven-shade-plugin/

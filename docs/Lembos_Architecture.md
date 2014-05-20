@@ -78,7 +78,7 @@ pattern for running Lembos is using `hadoop jar {LEMBOS_JAR} [hadoop options] [a
 this model, anything that is not a Hadoop argument will be passed to Node.js so that you can use `process.argv` just as
 you would had you invoked your Node.js code from the command line.  So for example, if I were to run Lembos using this:
 
-`hadoop jar target/lembos-1.0-SNAPSHOT.jar \
+`hadoop jar target/lembos-1.1-SNAPSHOT.jar \
   -D io.apigee.lembos.mapreduce.moduleName=wordcount \
   -D io.apigee.lembos.mapreduce.modulePath=examples/wordcount \
   -flag0 --opt0 val0 arg0

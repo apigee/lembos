@@ -18,24 +18,8 @@ specify one to use.
 
 ### Publishing an Official Release
 
-Performing an official release is a multi-step process, one for Sonatype and one for GitHub.
-
-#### Maven
-
-To perform the steps for Maven, run `mvn release:clean release:prepare release:perform -DperformRelease=true`, again
+To perform an official release, run `mvn release:clean release:prepare release:perform -DperformRelease=true`, again
 possibly needing to pass `-Dgpg.keyname`.
-
-#### GitHub Releases
-
-To perform the steps for GitHub Releases, create a new release by following these steps:
-
-* Visit [Lembos Releases][lembos-release]
-* Click the **Create a new release** button
-* Specify the appropriate `Tag version`
-* Specify a corresponding `Release title`
-* Fill out the appropriate `Release notes`
-* Attach the build artifact, the `lembos-{VERSION}.jar`
-* Submit
 
 ### Cleanup
 
