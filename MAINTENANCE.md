@@ -19,8 +19,21 @@ specify one to use.
 ### Publishing an Official Release
 
 To perform an official release, run `mvn release:clean release:prepare release:perform -DperformRelease=true`, again
-possibly needing to pass `-Dgpg.keyname`.  At this point, Maven has been updated but we need to update the official
-GitHub Release.  To do this, follow these instructions:
+possibly needing to pass `-Dgpg.keyname`.  If this succeeds, the artifact is in the Sonatype Staging repository and we
+need to officially *release* it.  To do this, follow these instructions:
+
+* Log into [Sonatype][sonatype-repo-browser]
+* Click the `Staging Repositories` link on the left side of the page
+* Browse to the `io-apigee-*` entry that is listed as `open` *(If there is more than one, find the appropriate one)*
+* Check the box beside the release and click the `Close` button
+* Fill in a description, typically something like "Lembos 1.0 release", and submit
+
+This will kick off a Sonatype validation process and once it's complete, you will get an email.  When the email comes in
+you should be able to refresh the page and the `Release` button will enable for the artifact when you check the box
+beside the appropriate build.  Click that button and you should finish the Maven part of the release process.
+
+At this point, Maven has been updated but we need to update the official GitHub Release.  To do this, follow these
+instructions:
 
 * Find the latest [Lembos Release][lembos-release] and click the `Edit` button beside it
 * Fill in the proper `Release title` *(Just the version number will do)*
