@@ -19,9 +19,19 @@ specify one to use.
 ### Publishing an Official Release
 
 To perform an official release, run `mvn release:clean release:prepare release:perform -DperformRelease=true`, again
-possibly needing to pass `-Dgpg.keyname`.
+possibly needing to pass `-Dgpg.keyname`.  At this point, Maven has been updated but we need to update the official
+GitHub Release.  To do this, follow these instructions:
+
+* Find the latest [Lembos Release][lembos-release] and click the `Edit` button beside it
+* Fill in the proper `Release title` *(Just the version number will do)*
+* Fill in the proper `Release notes`
+* Add the `target/lembos-{VERSION}.jar` to the release
+* Save
 
 ### Cleanup
+
+**Note:** If you are performing an official release, you should not perform this step until you have updating the
+GitHub Release as documented above.
 
 To clean up after this, run `mvn release:clean`.
 
