@@ -22,8 +22,8 @@ Performing an official release is a multi-step process, one for Sonatype and one
 
 #### Maven
 
-To perform the steps for Maven, run `mvn release:clean release:prepare release:perform`, again possibly needing to pass
-`-Dgpg.keyname`.
+To perform the steps for Maven, run `mvn release:clean release:prepare release:perform -DperformRelease=true`, again
+possibly needing to pass `-Dgpg.keyname`.
 
 #### GitHub Releases
 

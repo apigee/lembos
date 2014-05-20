@@ -10,6 +10,8 @@ syntax: glob
 *.ipr
 
 # Maven Files
+pom.xml.releaseBackup
+release.properties
 target/
 src/test/resources/node_modules/LembosMapReduceRunnerTest-testLibJars/src/target/
 
