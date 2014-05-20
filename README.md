@@ -60,9 +60,9 @@ to have following dependency:
 
 ## Further Reading
 
-While running the Lembos runner is quite simple, a lot happen behind the scenes that are not explained above.
-Most of these are related to how Hadoop works and we've documented the important stuff.  Below is a list of useful
-resources that can help explain what is going on:
+While running the Lembos runner is quite simple, a lot happens behind the scenes that are not explained above.  To
+better understand what is going on and how Lembos workse, below is a list of useful resources that can help explain what
+is going on and what else Lembos brings to the table:
 
 * [Anatomy of a Node.js MapReduce Job][anatomy-of-a-job]
 * [Lembos Architecture][lembos-architecture]

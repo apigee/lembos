@@ -8,7 +8,7 @@ Lembos is composed of two parts:
 Each of these will be described in greater detail below but before we do, it is worth mentioning that all of this is
 possible thanks to [Trireme][trireme].  Trireme is what provides the Node.js runtime within the JVM allowing you to
 write your MapReduce jobs as Node.js modules and have Hadoop drive the MapReduce lifecycle as if you had written your
-job using Java.  Let's get into the details so some of this becomes clearer.
+job using Java.  Let's get into the details as to what Lembos really provides and how it works.
 
 ## The Runner
 
