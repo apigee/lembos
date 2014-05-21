@@ -1,8 +1,9 @@
 Lembos a Java-based library that provides an ecosystem allowing you to write your [MapReduce][mapreduce] jobs using
 Node.js and have them run natively within Hadoop as if written using Java.  The project is packaged as a JAR file
-that is intended to be run via `hadoop jar` just as you would have you written your MapReduce job in Java.  *(Note:
-There is an option to build a standalone executable JAR but that would require you to package up the JAR with the
-necessary Hadoop JARs in a [shaded][shade] JAR.  Since the build would be Hadoop version specific, we're not
+that is intended to be run via `hadoop jar` just as you would have you written your MapReduce job in Java.
+
+*(Note: There is an option to build a standalone executable JAR but that would require you to package up the JAR with
+the necessary Hadoop JARs in a [shaded][shade] JAR.  Since the build would be Hadoop version specific, we're not
 building those right now.  For more details on how to do this, read the **Getting Started (Developer)**
 documentation below.)*
 
@@ -67,11 +68,13 @@ is going on and what else Lembos brings to the table:
 * [Anatomy of a Node.js MapReduce Job][anatomy-of-a-job]
 * [Lembos Architecture][lembos-architecture]
 * [Lembos Command Line Interface][lembos-cli]
+* [Lembos Node.js API Reference][lembos-nodejs-api]
 
 [anatomy-of-a-job]: https://github.com/apigee/lembos/blob/master/docs/Anatomy_of_a_NodeJS_MapReduce_Job.md
 [latest-release]: https://github.com/apigee/lembos/releases/download/lembos-1.0/lembos-1.0.jar
 [lembos-architecture]: https://github.com/apigee/lembos/blob/master/docs/Lembos_Architecture.md
 [lembos-cli]: https://github.com/apigee/lembos/blob/master/docs/Lembos_CLI.md
+[lembos-nodejs-api]: https://github.com/apigee/lembos/blob/master/docs/Lembos_NodeJS_API_Reference.md
 [mapreduce]: http://en.wikipedia.org/wiki/MapReduce
 [maven]: http://maven.apache.org/
 [release-notes]: https://github.com/apigee/lembos/releases
